@@ -6,6 +6,7 @@ import ChatDetailsScreen from "../screens/ChatDetailsScreen"
 import HomeScreen from "../screens/HomeScreen"
 import ChatScreen from "../screens/ChatScreen"
 import ProfileScreen from "../screens/ProfileScreen"
+import { Ionicons } from "@expo/vector-icons"
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -13,7 +14,39 @@ const Tab = createBottomTabNavigator()
 const AppNavigation = () => {
   const HomeTabs = () => {
     return (
-      <Tab.Navigator>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          headerShown: false,
+          tabBarIcon: ({ focused }) => {
+            let iconName = ""
+
+            route.name === "Home"
+              ? (iconName = "home")
+              : route.name === "Chat"
+              ? (iconName = "chatbubbles-outline")
+              : route.name === "Profile"
+              ? (iconName = "person-outline")
+              : ""
+
+            return (
+              <Ionicons
+                name={iconName}
+                size={22}
+                color={focused ? "#3B82F6" : "gray"}
+              />
+            )
+          },
+
+          tabBarActiveTintColor: "#3B82F6",
+          tabBarLabelStyle: {
+            fontWeight: "bold",
+          },
+          tabBarInactiveTintColor: "gray",
+          tabBarStyle: {
+            backgroundColor: "white",
+          },
+        })}
+      >
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Chat" component={ChatScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
@@ -24,7 +57,7 @@ const AppNavigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Welcome"
+        initialRouteName="HomeTabs"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="Welcome" component={WelcomeScreen} />
@@ -35,7 +68,7 @@ const AppNavigation = () => {
             presentation: "modal",
           }}
         />
-        <Stack.Screen name="Home" component={HomeTabs} />
+        <Stack.Screen name="HomeTabs" component={HomeTabs} />
       </Stack.Navigator>
     </NavigationContainer>
   )

@@ -7,5 +7,17 @@ import user6 from "./user6.jpeg"
 import user7 from "./user7.jpeg"
 import user8 from "./user8.jpeg"
 import user9 from "./user9.jpeg"
+import profile from "./profile.jpeg"
 
-export { user1, user2, user3, user4, user5, user6, user7, user8, user9 }
+export {
+  user1,
+  user2,
+  user3,
+  user4,
+  user5,
+  user6,
+  user7,
+  user8,
+  user9,
+  profile,
+}
